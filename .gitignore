@@ -2,3 +2,10 @@
 .venv1
 __pycache__
 /docker/*.yml
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.lock.hcl
+*.log
