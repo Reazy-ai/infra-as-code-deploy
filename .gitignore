@@ -1,3 +1,4 @@
 .env
 .venv1
 __pycache__
+/docker/*.yml
