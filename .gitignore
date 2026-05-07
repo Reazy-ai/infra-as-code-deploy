@@ -9,3 +9,6 @@ __pycache__
 *.tfvars.json
 *.lock.hcl
 *.log
+*.pem
+*.key
+*.pub
