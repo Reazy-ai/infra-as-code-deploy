@@ -37,10 +37,16 @@ resource "aws_security_group" "app_sg" {
 resource "aws_instance" "app" {
   ami = "ami-0e294ce625e6437e2"
   instance_type = "t3.micro"
+  key_name = aws_key_pair.ansible_config_key.key_name
 
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
     tags = {
         Name = "dev-app-instance"
     }
+}
+
+resource "aws_key_pair" "ansible_config_key" {
+  key_name = "${var.environment}-key"
+  public_key = file(var.public_key_path)
 }
