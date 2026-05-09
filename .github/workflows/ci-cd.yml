@@ -48,12 +48,18 @@ jobs:
     - name: Initialize Terraform
       run: terraform init
       working-directory: terraform/environments/dev
+
+    - name: Create SSH key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+        chmod 600 key.pem
     
     - name: Apply Terraform configuration
       run: terraform apply -auto-approve
       working-directory: terraform/environments/dev
       env:
         TF_VAR_environment: dev
+        TF_VAR_public_key_path: terraform/environments/dev/keys/ansibleSSHkey.pub
 
     - name: Get Terraform Output
       id: tfout
