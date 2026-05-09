@@ -59,7 +59,6 @@ jobs:
       working-directory: terraform/environments/dev
       env:
         TF_VAR_environment: dev
-        TF_VAR_public_key_path: terraform/environments/dev/keys/ansibleSSHkey.pub
 
     - name: Get Terraform Output
       id: tfout
