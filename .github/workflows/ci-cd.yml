@@ -52,6 +52,8 @@ jobs:
     - name: Apply Terraform configuration
       run: terraform apply -auto-approve
       working-directory: terraform/environments/dev
+      env:
+        TF_VAR_environment: dev
 
     - name: Get Terraform Output
       id: tfout
