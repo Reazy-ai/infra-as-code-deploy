@@ -33,3 +33,29 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/apidev:latest
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-west-2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v4
+      with:
+        terraform_version: 1.14.8
+
+    - name: Initialize Terraform
+      run: terraform init
+      working-directory: ./terraform/environments/dev
+    
+    - name: Apply Terraform configuration
+      run: terraform apply -auto-approve
+      working-directory: ./terraform/environments/dev
+
+    - name: Get Terraform Output
+      id: tfout
+      run: |
+        echo "EC2_IP=$(terraform output -raw public_ip)" >> $GITHUB_ENV
+      working-directory: ./terraform/environments/dev
+
