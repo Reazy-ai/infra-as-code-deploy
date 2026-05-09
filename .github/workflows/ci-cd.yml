@@ -51,11 +51,11 @@ jobs:
     
     - name: Apply Terraform configuration
       run: terraform apply -auto-approve
-      working-directory: ../../terraform/environments/dev
+      working-directory: terraform/environments/dev
 
     - name: Get Terraform Output
       id: tfout
       run: |
         echo "EC2_IP=$(terraform output -raw public_ip)" >> $GITHUB_ENV
-      working-directory: ../../terraform/environments/dev
+      working-directory: terraform/environments/dev
 
