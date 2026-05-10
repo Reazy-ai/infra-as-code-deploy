@@ -48,5 +48,5 @@ resource "aws_instance" "app" {
 
 resource "aws_key_pair" "ansible_config_key" {
   key_name = "${var.environment}-key"
-  public_key = file(var.public_key_path)
+  public_key = var.public_key_path
 }
