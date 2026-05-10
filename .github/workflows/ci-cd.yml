@@ -84,4 +84,5 @@ jobs:
         ansible-playbook \
         -i ansible/inventory/hosts.ini ansible/playbooks/deploy.yml \
         --vault-password-file vault.pass
+        -e ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
